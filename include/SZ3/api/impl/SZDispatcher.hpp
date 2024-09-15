@@ -7,6 +7,7 @@
 #include "SZ3/api/impl/SZAlgoInterp.hpp"
 #include "SZ3/api/impl/SZAlgoLorenzoReg.hpp"
 #include "SZ3/api/impl/SZAlgo.hpp"
+#include "SZ3/api/impl/SZFzgpu.hpp"
 #include <cmath>
 
 namespace SZ3 {
@@ -15,6 +16,10 @@ namespace SZ3 {
         
         assert(N == conf.N);
         calAbsErrorBound(conf, data);
+
+        if (conf.fzgpu) {
+            return SZ_compress_fzgpu<T, N>(conf, data, cmpData, cmpCap);
+        }
 
 //        char *cmpData;
         if (conf.absErrorBound == 0) {

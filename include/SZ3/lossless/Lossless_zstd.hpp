@@ -5,7 +5,7 @@
 #ifndef SZ_LOSSLESS_ZSTD_HPP
 #define SZ_LOSSLESS_ZSTD_HPP
 
-#include "zstd.h"
+// #include "zstd.h"
 #include "SZ3/def.hpp"
 #include "SZ3/utils/MemoryUtil.hpp"
 #include "SZ3/utils/FileUtil.hpp"
@@ -28,7 +28,8 @@ namespace SZ3 {
 //                throw std::invalid_argument(
 //                    "dstCap not large enough for zstd");
 //            }
-            return ZSTD_compress(dst, dstCap, src, srcLen, compression_level);
+        //     return ZSTD_compress(dst, dstCap, src, srcLen, compression_level);
+        return 0;
 //            dstLen += sizeof(size_t);
 //            return compressBytes;
         }
@@ -39,7 +40,8 @@ namespace SZ3 {
 //            read(dataLength, dataPos, compressedSize);
 
 //            uchar *oriData = new uchar[dataLength];
-            return ZSTD_decompress(dst, dstCap, src, srcLen);
+        //     return ZSTD_decompress(dst, dstCap, src, srcLen);
+        return 0;
 //            compressedSize = dataLength;
 //            return oriData;
         }

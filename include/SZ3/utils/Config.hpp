@@ -315,6 +315,7 @@ class Config {
     bool regression = true;
     bool regression2 = false;
     bool openmp = false;
+    bool fzgpu = false;
     uint8_t dataType = SZ_FLOAT;  // dataType is only used in HDF5 filter
     uint8_t lossless = 1;         // 0-> skip lossless(use lossless_bypass); 1-> zstd
     uint8_t encoder = 1;          // 0-> skip encoder; 1->HuffmanEncoder; 2->ArithmeticEncoder

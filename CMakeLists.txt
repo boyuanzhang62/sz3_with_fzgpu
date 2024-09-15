@@ -36,6 +36,42 @@ target_include_directories(
         $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/include>
         $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
 )
+
+# === Begin Modification ===
+
+# Specify the paths to the header files and the .so file
+set(FOO_INCLUDE_DIR "/home/bozhan/repo/fz_for_sz3_integration/include")
+set(FOO_LIBRARY_DIR "/home/bozhan/repo/fz_for_sz3_integration/build")
+# set(FOO_LIBRARY     "/home/bozhan/repo/fz_for_sz3_integration/build/libfzgpu_cu_compat.so")
+set(FOO_LIBRARY     "/home/bozhan/repo/fz_for_sz3_integration/build/libfzgpu_cu_driver.so")
+set(FOO_LIBRARY     "/home/bozhan/repo/fz_for_sz3_integration/build/libfzgpu_cu_module.so")
+set(FOO_LIBRARY     "/home/bozhan/repo/fz_for_sz3_integration/build/libfzgpu_cu_demo.so")
+
+
+# Include the header files
+target_include_directories(
+    ${PROJECT_NAME} INTERFACE
+    $<BUILD_INTERFACE:${FOO_INCLUDE_DIR}>
+    $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
+)
+
+# Link the shared library
+target_link_libraries(
+    ${PROJECT_NAME} INTERFACE
+    ${FOO_LIBRARY}
+)
+
+# Set ABI compatibility flag if needed
+# target_compile_definitions(${PROJECT_NAME} INTERFACE _GLIBCXX_USE_CXX11_ABI=0)
+
+# Set the RPATH so the runtime linker can find the .so file
+set_target_properties(${PROJECT_NAME} PROPERTIES
+    BUILD_RPATH ${FOO_LIBRARY_DIR}
+    INSTALL_RPATH ${FOO_LIBRARY_DIR}
+)
+
+# === End Modification ===
+
 target_compile_features(${PROJECT_NAME}
         INTERFACE cxx_std_17
 )

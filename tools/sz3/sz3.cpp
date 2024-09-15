@@ -207,6 +207,8 @@ int main(int argc, char *argv[]) {
 
     bool sz2mode = false;
 
+    bool fzgpu = false;
+
     size_t r4 = 0;
     size_t r3 = 0;
     size_t r2 = 0;
@@ -301,6 +303,9 @@ int main(int argc, char *argv[]) {
                 if (++i == argc)
                     usage();
                 conPath = argv[i];
+                break;
+            case 'F':
+                fzgpu = true;
                 break;
             case '1':
                 if (++i == argc || sscanf(argv[i], "%zu", &r1) != 1)
@@ -403,6 +408,11 @@ int main(int argc, char *argv[]) {
     }
     if (compression && conPath != nullptr) {
         conf.loadcfg(conPath);
+    }
+
+    // enable fzgpu mode
+    if (fzgpu) {
+        conf.fzgpu = true;
     }
 
     if (errBoundMode != nullptr) {
